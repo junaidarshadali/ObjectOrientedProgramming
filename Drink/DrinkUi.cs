@@ -17,7 +17,7 @@ namespace RestaurantSystem.Drink
             for (int i = 0; i < service.GetAllDrinks().Count; i++)
             {
                 DrinkModel drink = service.GetAllDrinks()[i];
-                Console.WriteLine((i + 1) + ".\t" + drink.Name + "\tRs." + drink.Price);
+                Console.WriteLine((i + 1) + ".\t" + drink.drinkName + "\tRs." + drink.drinkPrice);
             }
         }
 
@@ -44,7 +44,7 @@ namespace RestaurantSystem.Drink
             if (service.IsValidNumber(number))
             {
                 DrinkModel drink = service.GetDrink(number);
-                Console.WriteLine("Current Price of " + drink.Name + " is Rs." + drink.Price);
+                Console.WriteLine("Current Price of " + drink.drinkName + " is Rs." + drink.drinkPrice);
                 Console.Write("Enter New Price: ");
                 int newPrice = Convert.ToInt32(Console.ReadLine());
 

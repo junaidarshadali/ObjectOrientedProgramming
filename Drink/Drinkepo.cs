@@ -6,15 +6,14 @@ namespace RestaurantSystem.Drink
 {
     public class DrinkRepo
     {
-        public List<DrinkModel> drinks = new List<DrinkModel>();
-        string path = "drinks.txt";
+        public List<DrinkModel> drinks= new List<DrinkModel>();
 
-        public DrinkRepo()
-        {
+        string path = "drink.txt";
+
+        public DrinkRepo(){
             LoadFromFile();
         }
 
-        // Read the file and fill the list
         public void LoadFromFile()
         {
             // First time: file does not exist, so add default drinks
@@ -43,15 +42,16 @@ namespace RestaurantSystem.Drink
             reader.Close();
         }
 
-        // Write the whole list into the file
         public void SaveToFile()
         {
             StreamWriter writer = new StreamWriter(path);
             for (int i = 0; i < drinks.Count; i++)
             {
-                writer.WriteLine(drinks[i].Name + "|" + drinks[i].Price);
+                writer.WriteLine(drinks[i].drinkName + "|" + drinks[i].drinkPrice);
             }
             writer.Close();
         }
+
+       
     }
 }

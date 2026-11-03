@@ -5,12 +5,12 @@ namespace RestaurantSystem.Food
     public class FoodService
     {
         FoodRepo repo;
-
+       
         public FoodService(FoodRepo repo)
         {
             this.repo = repo;
         }
-
+        
         public List<FoodModel> GetAllFoods()
         {
             return repo.foods;
@@ -19,7 +19,8 @@ namespace RestaurantSystem.Food
         public void AddFood(string name, int price)
         {
             FoodModel food = new FoodModel(name, price);
-            repo.foods.Add(food);
+            repo.foods.
+                Add(food);
             repo.SaveToFile();
         }
 

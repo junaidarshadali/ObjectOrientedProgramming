@@ -5,7 +5,7 @@ namespace RestaurantSystem.Food
     public class FoodUi
     {
         FoodService service;
-
+        // constructor
         public FoodUi(FoodService service)
         {
             this.service = service;

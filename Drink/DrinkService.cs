@@ -39,7 +39,7 @@ namespace RestaurantSystem.Drink
 
         public void UpdatePrice(int number, int newPrice)
         {
-            repo.drinks[number - 1].Price = newPrice;
+            repo.drinks[number - 1].drinkPrice = newPrice;
             repo.SaveToFile();
         }
     }

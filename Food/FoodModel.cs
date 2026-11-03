@@ -5,10 +5,10 @@
         public string Name;
         public int Price;
 
-        public FoodModel(string name, int price)
+        public FoodModel(string Name, int Price)
         {
-            Name = name;
-            Price = price;
+            this.Name = Name;
+            this.Price = Price;
         }
     }
 }

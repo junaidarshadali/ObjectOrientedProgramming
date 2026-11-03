@@ -9,7 +9,7 @@ namespace RestaurantSystem.Food
         public List<FoodModel> foods = new List<FoodModel>();
         string path = "foods.txt";
 
-        public FoodRepo()
+        public FoodRepo()   // Costructor bnaya ha 
         {
             LoadFromFile();
         }
@@ -33,8 +33,8 @@ namespace RestaurantSystem.Food
             }
 
             StreamReader reader = new StreamReader(path);
-            string line = reader.ReadLine();
-            while (line != null)
+            string line;
+            while (( line = reader.ReadLine()) != null)
             {
                 if (line != "")
                 {
@@ -49,6 +49,8 @@ namespace RestaurantSystem.Food
         }
 
         // Write the whole list into the file
+        // its an function that write this in file
+
         public void SaveToFile()
         {
             StreamWriter writer = new StreamWriter(path);
