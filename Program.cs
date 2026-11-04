@@ -35,7 +35,10 @@ namespace RestaurantSystem
                 Console.WriteLine("Restaurant Order Management System\n");
                 Console.WriteLine("1. User Panel");
                 Console.WriteLine("2. Admin Panel");
-                Console.WriteLine("3. Exit");
+                Console.WriteLine("3rd option by search by category and price ");
+                Console.WriteLine("4th option search order by category");
+                Console.WriteLine("pagginate view")
+                Console.WriteLine(" 5th Exit");
                 Console.Write("Choose Option: ");
                 int mainOption = Convert.ToInt32(Console.ReadLine());
 
@@ -51,6 +54,19 @@ namespace RestaurantSystem
                     adminUi.Login();
                 }
                 else if (mainOption == 3)
+                {
+                    orderUi.SearchMenuScreen();
+                }
+
+                else if (mainOption == 4)
+                {
+                    orderUi.SearchByCategoryScreen();
+                }
+                else if (mainOption == 5)
+                {
+                    orderUi.SimplePageScreen();
+                }
+                else if (mainOption == 6)
                 {
                     break;
                 }

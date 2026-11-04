@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace RestaurantSystem.Order
 {
@@ -25,6 +26,7 @@ namespace RestaurantSystem.Order
 
         public List<OrderModel> GetOrdersByCustomer(string customerName)
         {
+
             List<OrderModel> result = new List<OrderModel>();
             for (int i = 0; i < repo.orders.Count; i++)
             {
@@ -48,3 +50,18 @@ namespace RestaurantSystem.Order
         }
     }
 }
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+//SearchOption by category and price category is not case 
+//    Casesenstive and for price user enter above and below for comparison than enter price so this filter records make it easy so my sir dont understand its ai

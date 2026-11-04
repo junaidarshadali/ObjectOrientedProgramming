@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using RestaurantSystem.Food;
 using RestaurantSystem.Drink;
+using RestaurantSystem.Food;
+using RestaurantSystem.Order;
 
 namespace RestaurantSystem.Order
 {
@@ -136,9 +137,9 @@ namespace RestaurantSystem.Order
                 int quantity = Convert.ToInt32(Console.ReadLine());
 
                 DrinkModel drink = drinkService.GetDrink(choose);
-                orderService.AddOrder(customerName, drink.Name, drink.Price, quantity);
+                orderService.AddOrder(customerName, drink.drinkName, drink.drinkPrice, quantity);
 
-                Console.WriteLine("\nAdded: " + drink.Name + " x" + quantity + " = Rs." + (drink.Price * quantity));
+                Console.WriteLine("\nAdded: " + drink.drinkName + " x" + quantity + " = Rs." + (drink.drinkPrice * quantity));
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
@@ -212,5 +213,167 @@ namespace RestaurantSystem.Order
             }
             Console.ReadKey();
         }
+
+        public void SearchMenuScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("===== SEARCH MENU =====");
+
+            Console.Write("Enter category (food / drink / all): ");
+            string category = Console.ReadLine().ToLower();
+
+            if (category != "food" && category != "drink" && category != "all")
+            {
+                Console.WriteLine("Invalid category!");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write("Enter comparison (Above / Below): ");
+            string comparison = Console.ReadLine().ToLower();
+
+            if (comparison != "above" && comparison != "below")
+            {
+                Console.WriteLine("Invalid comparison!");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write("Enter price: ");
+            int price = Convert.ToInt32(Console.ReadLine());
+
+            int found = 0;
+            Console.WriteLine("\nCategory\tItem\t\t\tPrice");
+            Console.WriteLine("----------------------------------------------------");
+
+            if (category == "food" || category == "all")
+            {
+                List<FoodModel> foods = foodService.SearchByPrice(comparison, price);
+                for (int i = 0; i < foods.Count; i++)
+                {
+                    Console.WriteLine("Food\t\t" + foods[i].Name + "\t\tRs." + foods[i].Price);
+                    found++;
+                }
+            }
+
+            if (category == "drink" || category == "all")
+            {
+                List<DrinkModel> drinks = drinkService.SearchByPrice(comparison, price);
+                for (int i = 0; i < drinks.Count; i++)
+                {
+                    Console.WriteLine("Drink\t\t" + drinks[i].drinkName + "\t\tRs." + drinks[i].drinkPrice);
+                    found++;
+                }
+            }
+
+            if (found == 0)
+            {
+                Console.WriteLine("No items found!");
+            }
+
+            Console.WriteLine("\nPress any key to go back...");
+            Console.ReadKey();
+        }
+
+        public void SearchByCategoryScreen()
+        {
+            Console.Clear();
+            Console.WriteLine("===== SEARCH BY CATEGORY =====");
+
+            Console.Write("Enter category (food / drink / all): ");
+            string category = Console.ReadLine().ToLower();   // not case sensitive
+
+            if (category != "food" && category != "drink" && category != "all")
+            {
+                Console.WriteLine("Invalid category!");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.WriteLine("Category Item  And  Price");
+            Console.WriteLine("----------------------------------------------------");
+
+            if (category == "food" || category == "all")
+            {
+                List<FoodModel> foods = foodService.GetAllFoods();
+                for (int i = 0; i < foods.Count; i++)
+                {
+                    Console.WriteLine("Food\t\t" + foods[i].Name + "\t\tRs." + foods[i].Price);
+                }
+            }
+
+            if (category == "drink" || category == "all")
+            {
+                List<DrinkModel> drinks = drinkService.GetAllDrinks();
+                for (int i = 0; i < drinks.Count; i++)
+                {
+                    Console.WriteLine("Drink\t\t" + drinks[i].drinkName + "\t\tRs." + drinks[i].drinkPrice);
+                }
+            }
+
+            Console.WriteLine("\nPress any key to go back...");
+            Console.ReadKey();
+        }
+
     }
-}
+
+            // ---------- SIMPLE PAGES ----------
+        public void SimplePageScreen()
+        {
+            Console.Clear();
+            Console.Write("Enter category (food / drink / all): ");
+            string category = Console.ReadLine().ToLower();
+
+            // step 1: collect records in one list
+            List<string> lines = new List<string>();
+
+            if (category == "food" || category == "all")
+            {
+                List<FoodModel> foods = foodService.GetAllFoods();
+                for (int i = 0; i < foods.Count; i++)
+                {
+                    lines.Add("Food\t" + foods[i].Name + "\tRs." + foods[i].Price);
+                }
+            }
+
+            if (category == "drink" || category == "all")
+            {
+                List<DrinkModel> drinks = drinkService.GetAllDrinks();
+                for (int i = 0; i < drinks.Count; i++)
+                {
+                    lines.Add("Drink\t" + drinks[i].drinkName + "\tRs." + drinks[i].drinkPrice);
+                }
+            }
+
+            if (lines.Count == 0)
+            {
+                Console.WriteLine("No items found!");
+                Console.ReadKey();
+                return;
+            }
+
+            // step 2: find total pages (4 records per page)
+            int pageSize = 4;
+            int totalPages = lines.Count / pageSize;
+            if (lines.Count % pageSize != 0)
+            {
+                totalPages = totalPages + 1;
+            }
+
+            int page = 1;
+
+            // step 3: show one page, then ask what to do
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("===== RESULTS =====");
+
+                int start = (page - 1) * pageSize;
+                int end = start + pageSize;
+                if (end > lines.Count)
+                {
+                    end = lines.Count;
+                }
+            }
+        }
+

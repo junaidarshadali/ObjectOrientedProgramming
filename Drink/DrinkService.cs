@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RestaurantSystem.Drink;
 
 namespace RestaurantSystem.Drink
 {
@@ -42,5 +43,26 @@ namespace RestaurantSystem.Drink
             repo.drinks[number - 1].drinkPrice = newPrice;
             repo.SaveToFile();
         }
+
+        public List<DrinkModel> SearchByPrice(string comparison, int price)
+        {
+            List<DrinkModel> result = new List<DrinkModel>();
+            comparison = comparison.ToLower();   // not case sensitive
+
+            for (int i = 0; i < repo.drinks.Count; i++)
+            {
+                if (comparison == "above" && repo.drinks[i].drinkPrice > price)
+                {
+                    result.Add(repo.drinks[i]);
+                }
+                else if (comparison == "below" && repo.drinks[i].drinkPrice < price)
+                {
+                    result.Add(repo.drinks[i]);
+                }
+            }
+            return result;
+        }
     }
 }
+
+

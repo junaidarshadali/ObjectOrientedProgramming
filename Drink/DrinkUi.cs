@@ -41,7 +41,7 @@ namespace RestaurantSystem.Drink
             Console.Write("\nEnter drink number to update price: ");
             int number = Convert.ToInt32(Console.ReadLine());
 
-            if (service.IsValidNumber(number))
+            if (service.IsValidNumber(number)) 
             {
                 DrinkModel drink = service.GetDrink(number);
                 Console.WriteLine("Current Price of " + drink.drinkName + " is Rs." + drink.drinkPrice);
